@@ -7,6 +7,7 @@ router = APIRouter()
 
 @router.post("/login", response_model=Token)
 async def login(client: LoginClient):
+    print("hello world ")
     db_client = await client_collection.find_one({"email": client.email})
     if db_client is None or not verify_password(client.password, db_client["password"]):
         raise HTTPException(status_code=401, detail="Invalid credentials")
